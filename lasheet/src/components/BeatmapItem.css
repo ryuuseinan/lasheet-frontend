@@ -1,0 +1,101 @@
+/* Estilos para la caja */
+.beatmap-item-box {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.beatmap-item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.beatmap-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Imagen de fondo con desenfoque */
+.bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(1px) saturate(150%);
+  z-index: -1;
+}
+
+/* Contenido de la tarjeta */
+.card-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+}
+.card-content:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: background-color 0.2s ease;
+}
+.artist-title-beatmap a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.artist-title-beatmap {
+  margin: 10px 0;
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.diff-container {
+  margin-top: 10px;
+}
+
+.diff-container img {
+  width: 25px;
+  height: 25px;
+  margin-right: 5px;
+}
+
+/* Para pantallas grandes (3 columnas) */
+@media (min-width: 1024px) {
+  .beatmap-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Para pantallas medianas (2 columnas) */
+@media (max-width: 768px) {
+  .beatmap-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Para pantallas pequeñas (1 columna) */
+@media (max-width: 480px) {
+  .beatmap-list {
+    grid-template-columns: 1fr;
+  }
+}

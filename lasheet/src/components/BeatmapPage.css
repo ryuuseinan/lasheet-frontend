@@ -1,0 +1,82 @@
+.beatmap-item-box-long {
+    width: 80%;
+    height: 80%;
+    margin: 0 auto;
+    margin-top: 50px;
+  }
+  
+  .beatmap-page {
+    border-radius: 10px;
+    position: relative; /* Establece el contenedor como relativo para posicionar la imagen de fondo */
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden; /* Asegura que cualquier contenido que sobresalga esté oculto */
+  }
+  
+  .bg-image {
+    position: absolute;  /* Posiciona la imagen de fondo de manera absoluta */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(1px) saturate(150%);  /* Aplica un filtro de desenfoque y saturación */
+    z-index: -1;  /* Coloca la imagen detrás del contenido */
+  }
+  
+  .card-content {
+    position: relative;
+    z-index: 1;  /* Asegura que el contenido esté por encima de la imagen de fondo */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro translúcido para que el texto sea legible */
+    padding: 20px;
+    border-radius: 10px; /* Opcional, da bordes redondeados */
+  }
+  
+  .card-content:hover {
+    background-color: rgba(0, 0, 0, 0.4); /* Efecto hover con un fondo ligeramente más claro */
+    transition: background-color 0.2s ease;
+  }
+  
+  .beatmap-page h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: white; /* Asegura que el texto sea blanco sobre el fondo oscuro */
+  }
+  
+  .beatmap-page p {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    color: white; /* Asegura que el texto sea blanco sobre el fondo oscuro */
+  }
+  
+  .beatmap-page h2 {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    border-top: 2px solid #ccc;
+    padding-top: 1rem;
+    color: white; /* Asegura que el texto sea blanco sobre el fondo oscuro */
+  }
+  
+  .difficulty-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .difficulty-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    color: white; /* Asegura que el texto sea blanco sobre el fondo oscuro */
+  }
+  
+  .difficulty-icon {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .difficulty-item span {
+    font-size: 1.1rem;
+  }
+  

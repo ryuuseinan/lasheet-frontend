@@ -1,0 +1,81 @@
+:root {
+  --primary-color: #f06292; /* Color base rosado */
+  --navbar-color: rgba(240, 98, 146, 0.2); /* rosado claro para el navbar */
+  --body-color: #f8bbd0; /* rosado oscuro para el body */
+}
+
+p{
+  font-size: 18px;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: var(--body-color);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem;
+  background-color: var(--navbar-color); /* color del navbar */
+}
+
+.bg-list {
+  padding-left: 5px;
+  max-width: 95px;
+  max-height: 95px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.diff-container {
+  display: flex;
+  align-items: center;
+  padding: 0.2rem;
+  padding-left: 10px;
+}
+
+.card {
+  border-radius: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.card-body{
+  padding: 5px;
+}
+
+.artist-title-beatmap{
+  margin-left: 10px;
+}
+.image-container {
+  display: flex;
+  align-items: center;
+}
+
+.image-details {
+  margin-left: 1rem;
+}
+
+.badge-custom {
+  margin-right: 0.5rem;
+}
+
+/* Opcional: Si tienes botones en el header-container, puedes estilizarlo */
+.header-container .btn {
+  background-color: var(--primary-color);
+  border: none;
+}
+
+.header-container .btn:hover {
+  background-color: darken(var(--primary-color), 10%); /* ajusta el color cuando se pasa el cursor */
+}
+
+a{
+  color: var(--primary-color);
+}
+a:hover{
+  color: darken(var(--primary-color), 10%);
+}

@@ -59,7 +59,7 @@ const BeatmapPage = () => {
             <div className="beatmap-page">
                 <div className="bg-image" style={{ backgroundImage: `url(http://127.0.0.1:5000/assets/${beatmap.bg})` }}></div>
                 <div className="card-content">
-                    <h1>{beatmap.artist} - {beatmap.title}</h1>
+                    <h1>{beatmap.artist} - {beatmap.title} <a href={`https://osu.ppy.sh/beatmapsets/${beatmap.beatmapset_id}`} target="_blank" rel="noopener noreferrer"><i className="fas fa-external-link-alt"></i></a></h1>
                     <p className="creator">Mapped by <a href={`https://osu.ppy.sh/users/${beatmap.creator}`} target="_blank" rel="noopener noreferrer">{beatmap.creator}</a></p>
                     <p className="size">Size: {(beatmap.size / (1024 * 1024)).toFixed(2)} MB</p>
 

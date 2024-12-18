@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BeatmapList from './components/BeatmapList';
 import BaseLayout from './components/BaseLayout';
 import BeatmapPage from './components/BeatmapPage'; // Nueva página para mostrar un beatmap
+import Alert from './components/Alert';
 
 const App = () => {
   const [beatmaps, setBeatmaps] = useState([]);
@@ -25,6 +26,7 @@ const App = () => {
   return (
     <Router>
       <BaseLayout>
+        <Alert />
         <Routes>
           {/* Ruta principal: lista de beatmaps */}
           <Route path="/" element={<BeatmapList beatmaps={beatmaps} />} />

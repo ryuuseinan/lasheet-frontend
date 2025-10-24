@@ -4,6 +4,7 @@ import BeatmapList from './components/BeatmapList';
 import BaseLayout from './components/BaseLayout';
 import BeatmapPage from './components/BeatmapPage'; // Nueva página para mostrar un beatmap
 import Alert from './components/Alert';
+import { API_BASE_URL } from './config';
 
 const App = () => {
   const [beatmaps, setBeatmaps] = useState([]);
@@ -11,7 +12,7 @@ const App = () => {
   useEffect(() => {
     const fetchBeatmaps = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:5000/api/beatmaps"); // Reemplaza con la URL de tu API
+        const response = await fetch(`${API_BASE_URL}/api/beatmaps`); // Reemplaza con la URL de tu API
         const data = await response.json();
         setBeatmaps(data); // Establece los datos obtenidos en el estado
       } catch (error) {

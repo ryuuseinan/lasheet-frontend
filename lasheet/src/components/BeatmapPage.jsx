@@ -10,7 +10,7 @@ const BeatmapPage = () => {
     useEffect(() => {
         const fetchBeatmap = async () => {
             try {
-                const response = await fetch(`http://127.0.0.1:5000/api/beatmaps/${id}`); // URL de tu API para un beatmap específico
+                const response = await fetch(`${API_BASE_URL}http://127.0.0.1:5000/api/beatmaps/${id}`); // URL de tu API para un beatmap específico
                 const data = await response.json();
                 setBeatmap(data);
                 // Inicializa el estado de los checkboxes

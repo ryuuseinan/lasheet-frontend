@@ -7,7 +7,7 @@ const Alert = () => {
   useEffect(() => {
     const fetchAlerts = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:5000/api/alerts");
+        const response = await fetch(`${API_BASE_URL}/api/alerts`);
         const data = await response.json();
 
         if (data.flashes) {

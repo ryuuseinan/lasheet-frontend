@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Upload.css';
+import { API_BASE_URL } from '../config';
 
 const Upload = () => {
   const [file, setFile] = useState(null);
@@ -24,7 +25,7 @@ const Upload = () => {
     formData.append('file', file);
 
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://127.0.0.1:5000/api/upload', true);
+    xhr.open('POST', `${API_BASE_URL}/api/upload`, true);
 
     // Calcular la velocidad de subida
     xhr.upload.onprogress = (event) => {

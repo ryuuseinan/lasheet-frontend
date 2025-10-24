@@ -12,7 +12,7 @@ const currentMode = Mode.DEV; // Cambia a Mode.PROD o Mode.TEST según el entorn
 let API_BASE_URL;
 
 if (currentMode === Mode.DEV) {
-    API_BASE_URL = 'http://localhost:5727';
+    API_BASE_URL = 'http://195.35.0.195:5727';
 } else if (currentMode === Mode.PROD) {
     API_BASE_URL = 'https://api.prosports.host';
 } else {

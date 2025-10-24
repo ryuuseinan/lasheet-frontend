@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './BeatmapPage.css';  // Asegúrate de tener el archivo CSS adecuado
+import { API_BASE_URL } from '../config';
 
 const BeatmapPage = () => {
     const { id } = useParams(); // Extrae el parámetro `id` de la URL
@@ -10,7 +11,7 @@ const BeatmapPage = () => {
     useEffect(() => {
         const fetchBeatmap = async () => {
             try {
-                const response = await fetch(`${API_BASE_URL}http://127.0.0.1:5000/api/beatmaps/${id}`); // URL de tu API para un beatmap específico
+                const response = await fetch(`${API_BASE_URL}/api/beatmaps/${id}`); // URL de tu API para un beatmap específico
                 const data = await response.json();
                 setBeatmap(data);
                 // Inicializa el estado de los checkboxes
@@ -57,7 +58,7 @@ const BeatmapPage = () => {
     return (
         <div className="beatmap-item-box-long">
             <div className="beatmap-page">
-                <div className="bg-image" style={{ backgroundImage: `url(http://127.0.0.1:5000/assets/${beatmap.bg})` }}></div>
+                <div className="bg-image" style={{ backgroundImage: `url(${API_BASE_URL}/assets/${beatmap.bg})` }}></div>
                 <div className="card-content">
                     <h1>{beatmap.artist} - {beatmap.title} <a href={`https://osu.ppy.sh/beatmapsets/${beatmap.beatmapset_id}`} target="_blank" rel="noopener noreferrer"><i className="fas fa-external-link-alt"></i></a></h1>
                     <p className="creator">Mapped by <a href={`https://osu.ppy.sh/users/${beatmap.creator}`} target="_blank" rel="noopener noreferrer">{beatmap.creator}</a></p>

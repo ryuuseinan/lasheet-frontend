@@ -1,41 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BeatmapList from './components/BeatmapList';
 import BaseLayout from './components/BaseLayout';
 import BeatmapPage from './components/BeatmapPage'; // Nueva página para mostrar un beatmap
+import Upload from './components/Upload';
 import Alert from './components/Alert';
-import { API_BASE_URL } from './config';
+import ToastContainer from './components/ToastContainer';
+import { BeatmapProvider } from './context/BeatmapContext';
+import { ToastProvider } from './context/ToastContext';
 
 const App = () => {
-  const [beatmaps, setBeatmaps] = useState([]);
-
-  useEffect(() => {
-    const fetchBeatmaps = async () => {
-      try {
-        const response = await fetch(`${API_BASE_URL}/api/beatmaps`); // Reemplaza con la URL de tu API
-        const data = await response.json();
-        setBeatmaps(data); // Establece los datos obtenidos en el estado
-      } catch (error) {
-        console.error("Error fetching beatmaps:", error);
-        setBeatmaps([]); // Establece un array vacío si ocurre un error
-      }
-    };
-
-    fetchBeatmaps();
-  }, []);
-
   return (
-    <Router>
-      <BaseLayout>
-        <Alert />
-        <Routes>
-          {/* Ruta principal: lista de beatmaps */}
-          <Route path="/" element={<BeatmapList beatmaps={beatmaps} />} />
-          {/* Ruta dinámica: página de un beatmap específico */}
-          <Route path="/beatmaps/:id" element={<BeatmapPage />} />
-        </Routes>
-      </BaseLayout>
-    </Router>
+    <ToastProvider>
+      <BeatmapProvider>
+        <Router>
+          <BaseLayout>
+            <Alert />
+            <ToastContainer />
+            <Routes>
+              {/* Ruta principal: lista de beatmaps */}
+              <Route path="/" element={<BeatmapList />} />
+              {/* Ruta de upload */}
+              <Route path="/upload" element={<Upload />} />
+              {/* Ruta dinámica: página de un beatmap específico */}
+              <Route path="/beatmaps/:id" element={<BeatmapPage />} />
+            </Routes>
+          </BaseLayout>
+        </Router>
+      </BeatmapProvider>
+    </ToastProvider>
   );
 };
 

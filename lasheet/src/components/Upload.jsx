@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Upload.css';
 import { API_BASE_URL } from '../config';
+import { useBeatmaps } from '../context/BeatmapContext';
+import { useToast } from '../context/ToastContext';
 
 const Upload = () => {
   const [file, setFile] = useState(null);
@@ -8,23 +11,35 @@ const Upload = () => {
   const [progress, setProgress] = useState(0); // Para la barra de progreso
   const [uploadSpeed, setUploadSpeed] = useState(0); // Para la velocidad de subida en MBps
   const [startTime, setStartTime] = useState(null); // Para calcular la velocidad
+  const [isUploading, setIsUploading] = useState(false); // Bloquea botón y muestra animación
+  
+  const { refreshBeatmaps } = useBeatmaps();
+  const navigate = useNavigate();
+  const { showSuccess, showError, showInfo } = useToast();
 
   const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
+    const selectedFile = event.target.files[0];
+    setFile(selectedFile);
+    setUploadMessage(''); // Clear any previous messages
+    if (selectedFile) {
+      showInfo(`File selected: ${selectedFile.name}`, 2000);
+    }
   };
 
   const handleUpload = (event) => {
     event.preventDefault();
 
     if (!file) {
-      setUploadMessage('Please select a file before uploading.');
+      const errorMsg = 'Please select a .osz file before uploading.';
+      setUploadMessage(errorMsg);
+      showError(errorMsg);
       return;
     }
 
     const formData = new FormData();
     formData.append('file', file);
 
-    const xhr = new XMLHttpRequest();
+  const xhr = new XMLHttpRequest();
     xhr.open('POST', `${API_BASE_URL}/api/upload`, true);
 
     // Calcular la velocidad de subida
@@ -43,20 +58,44 @@ const Upload = () => {
       }
     };
 
+    // Cuando la subida empieza
     xhr.onloadstart = () => {
       setStartTime(Date.now()); // Empezar a contar el tiempo cuando la subida comienza
+      setIsUploading(true);
+      setUploadMessage('');
+      setProgress(0);
+      setUploadSpeed(0);
     };
 
-    xhr.onload = () => {
+    xhr.onload = async () => {
       if (xhr.status === 200) {
-        setUploadMessage('File uploaded and processed successfully!');
+        setUploadMessage('File uploaded and processed successfully! Redirecting...');
+        // Mostrar notificación de éxito
+        showSuccess('Beatmap uploaded successfully! Updating list...', 3000);
+        // Refrescar la lista de beatmaps después de una subida exitosa
+        await refreshBeatmaps();
+        // Redirigir a la página principal después de 1.5 segundos
+        setTimeout(() => {
+          navigate('/');
+          showSuccess('Welcome back! Your new beatmap is now available.', 4000);
+        }, 1500);
       } else {
-        setUploadMessage('Error uploading file.');
+        const errorMsg = 'Error uploading file. Please try again.';
+        setUploadMessage(errorMsg);
+        showError(errorMsg);
       }
     };
 
     xhr.onerror = () => {
-      setUploadMessage('Error uploading file.');
+      const errorMsg = 'Network error occurred during upload.';
+      setUploadMessage(errorMsg);
+      showError(errorMsg);
+    };
+
+    // Siempre que termine (success o error) quitamos el bloqueo
+    xhr.onloadend = () => {
+      setIsUploading(false);
+      setStartTime(null);
     };
 
     xhr.send(formData);
@@ -73,10 +112,20 @@ const Upload = () => {
             id="file"
             accept=".osz"
             onChange={handleFileChange}
+            disabled={isUploading}
           />
         </div>
-        <button type="submit">
-          <i className="fa fa-upload" aria-hidden="true"></i> Upload
+        <button type="submit" disabled={isUploading} aria-busy={isUploading}>
+          {isUploading ? (
+            <>
+              <span className="spinner" aria-hidden="true"></span>
+              Uploading...
+            </>
+          ) : (
+            <>
+              <i className="fa fa-upload" aria-hidden="true"></i> Upload
+            </>
+          )}
         </button>
       </form>
 

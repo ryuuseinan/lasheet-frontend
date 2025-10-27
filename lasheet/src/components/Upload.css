@@ -66,6 +66,50 @@
   .upload-container button:active {
     transform: translateY(0);
   }
+
+  /* Disabled button */
+  .upload-container button[disabled],
+  .upload-container button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+    background-color: #6fbf73; /* slightly different to indicate disabled */
+  }
+
+  /* Spinner */
+  .spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Progress bar styles */
+  .progress-container {
+    width: 100%;
+    background: #eee;
+    border-radius: 6px;
+    height: 10px;
+    margin-top: 12px;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #4caf50, #81c784);
+    width: 0%;
+    transition: width 0.2s ease;
+  }
   
   /* Messages */
   .upload-container p {

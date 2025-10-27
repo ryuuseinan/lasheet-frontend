@@ -6,4 +6,29 @@
     padding: 0;
     list-style-type: none;
   }
+
+  /* Loading and error states */
+  .loading, .error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    font-size: 1.1rem;
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+  }
+
+  .loading {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    border: 1px solid #dee2e6;
+  }
+
+  .error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
   

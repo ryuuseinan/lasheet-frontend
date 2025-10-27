@@ -1,5 +1,6 @@
 import React from 'react';
 import './BeatmapItem.css';  // Asegúrate de tener el archivo CSS adecuado
+import { API_BASE_URL } from '../config';
 
 const BeatmapItem = ({ beatmap }) => {
   if (!beatmap) {
@@ -10,11 +11,11 @@ const imagePath = ``;
   return (
     <div className="beatmap-item-box">
       <div className="beatmap-item">
-        <div className="bg-image" style={{ backgroundImage: `url(http://127.0.0.1:5000/assets/${beatmap.bg})` }}></div>
+        <div className="bg-image" style={{ backgroundImage: `url(${beatmap.bg})` }}></div>
         
         <div className="card-content">
             <p className="artist-title-beatmap">
-                <a href={`/beatmaps/${beatmap.id}`}>{beatmap.artist} - {beatmap.title}</a>
+                <a href={`/beatmaps/${beatmap.beatmapset_id}`}>{beatmap.artist} - {beatmap.title}</a>
             </p>
 
             <p className="artist-title-beatmap">Mapped by <a href={`https://osu.ppy.sh/users/${beatmap.creator}`}>{beatmap.creator}</a></p>
